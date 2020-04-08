@@ -1,16 +1,27 @@
 <%- include("partials/header") -%>
 
-<div class="row text-center">
-    <% camps.forEach(camp => { %>
-    <div class="col-md-6 col-sm-12" style="display: flex; flex-wrap: wrap;">
-        <div class="card">
-            <img class="img-thumbnail" style="height: 400px; width: 100%;" src="<%= camp.img %>" alt="">
-            <div class="card-body">
-                <h3><%= camp.name %></h3>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Hello and Welcome!</h1>
+        <hr class="my-4">
+        <p>We have great options to spend a wonderful time outside with your loved ones. Please come and explore our
+            options.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/new" role="button">New Camp</a>
+        </p>
+    </div>
+    <div class="row text-center">
+        <% camps.forEach(camp => { %>
+        <div class="col-md-6 col-sm-12" style="display: flex; flex-wrap: wrap;">
+            <div class="card">
+                <img class="img-thumbnail" style="height: 400px; width: 100%;" src="<%= camp.img %>" alt="">
+                <div class="card-body">
+                    <h3><%= camp.name %></h3>
+                </div>
             </div>
         </div>
+        <% }) %>
     </div>
-    <% }) %>
 </div>
-
 <%- include("partials/footer") -%>
