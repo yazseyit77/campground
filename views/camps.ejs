@@ -1,0 +1,15 @@
+<%- include("partials/header") -%>
+<h1>Camps</h1>
+
+<a href="/camp/new"><button>Add Campground</button></a>
+
+<% camps.forEach(camp => { %>
+<div>
+    <h3><%= camp.name %></h3>
+    <img style="height: 300px; width: 400px;" src="<%= camp.img %>" alt="">
+</div>
+<h3></h3>
+
+<% }) %>
+
+<%- include("partials/footer") -%>
