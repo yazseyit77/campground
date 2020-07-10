@@ -12,14 +12,15 @@
         </div>
         <div class="col-md-9">
             <div class="img-thumbnail">
-                <img class="img-responsive" style="max-width: 70%" src="<%= camp.img %>" />
+                <img class="img-responsive" src="<%= camp.img %>" />
                 <div class="figure-caption">
                     <h4 class="pull-right">$16/night</h4>
                     <h3><a href=""><%= camp.name %></a></h3>
+                    <hr>
                     <p><%= camp.description %></p>
                 </div>
             </div>
-            <div class="card card-body bg-light">
+            <div class="card card-body ">
                 <div class="text-right">
                     <a class="btn btn-success" href="/camps/<%= camp._id %>/comments/new">Leave Comment</a>
                 </div>
@@ -29,7 +30,7 @@
                     <div class="col-md-12">
                         <strong><%= comment.author %></strong>
                         <span class="pull-right">10 days ago</span>
-                        <p>- <%= comment.text %></p>
+                        <p><em><%= comment.text %></em></p>
                     </div>
                 </div>
                 <% }) %>

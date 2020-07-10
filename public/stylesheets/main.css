@@ -1,0 +1,12 @@
+body {
+    background-color: azure;
+}
+
+.img-thumbnail img {
+    width: 100%;
+}
+
+.img-thumbnail .figure-caption {
+    padding: 9px;
+    padding-top: 15px;
+}

@@ -6,7 +6,7 @@ let Campground = require("./models/campground");
 let Comment = require("./models/comment");
 seedDB = require("./seeds");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 mongoose.connect("mongodb://localhost:27017/campground", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -50,7 +50,7 @@ app.get("/camps/new", (req, res) => {
 });
 
 // code below breaks the route crashing with css file
-app.get("/camps/app.css", function (req, res) {
+app.get("/camps/stylesheets/main.css", function (req, res) {
   break;
 });
 
