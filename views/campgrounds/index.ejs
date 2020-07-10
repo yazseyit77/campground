@@ -1,4 +1,4 @@
-<%- include("partials/header") -%>
+<%- include("../partials/header") -%>
 
 
 <div class="container">
@@ -13,7 +13,7 @@
     </div>
     <div class="row text-center">
         <% camps.forEach(camp => { %>
-        <div class="col-md-6 col-sm-12" style="display: flex; flex-wrap: wrap;">
+        <div class="col-md-6 col-sm-12" style="display: flex; flex-wrap: wrap; margin-bottom: 15px;">
             <div class="card">
                 <img class="img-thumbnail" style="height: 400px; width: 100%;" src="<%= camp.img %>" alt="">
                 <div class="card-body">
@@ -27,4 +27,5 @@
         <% }) %>
     </div>
 </div>
-<%- include("partials/footer") -%>
+
+<%- include("../partials/footer") -%>

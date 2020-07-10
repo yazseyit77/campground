@@ -4,15 +4,13 @@ let mongoose = require("mongoose");
 let app = express();
 Campground = require("./models/campground");
 seedDB = require("./seeds");
-
-seedDB();
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 mongoose.connect("mongodb://localhost:27017/campground", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+seedDB();
 
 // main page
 app.get("/", (req, res) => {
@@ -25,7 +23,7 @@ app.get("/camps", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("index.ejs", { camps: AllCampgrounds });
+      res.render("campgrounds/index.ejs", { camps: AllCampgrounds });
     }
   });
 });
@@ -43,14 +41,11 @@ app.post("/camps", (req, res) => {
       res.redirect("/camps");
     }
   });
-  // if (newCamp.name !== "") {
-  //   camps.push(newCamp);
-  // }
 });
 
 // create or new page, to create new campground
 app.get("/camps/new", (req, res) => {
-  res.render("new.ejs");
+  res.render("campgrounds/new.ejs");
 });
 
 // code below breaks the route crashing with css file
@@ -65,11 +60,28 @@ app.get("/camps/:id", (req, res) => {
     .populate("comments")
     .exec((err, foundCamp) => {
       if (err) {
-        console.log("err");
+        console.log(err);
       } else {
-        res.render("show.ejs", { camp: foundCamp });
+        console.log(foundCamp);
+        res.render("campgrounds/show.ejs", { camp: foundCamp });
       }
     });
 });
 
+// =================
+// COMMENTS ROUTES
+// =================
+app.get("/camps/:id/comments/new", function (req, res) {
+  Campground.findById(req.params.id, function (err, camp) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("comments/new.ejs", { camp: camp });
+    }
+  });
+  // res.render("comments/new.ejs");
+});
+
+// =================
+// PORT localhost:7000
 app.listen(7000, console.log("Camping app listening on PORT: 7000"));
