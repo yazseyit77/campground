@@ -2,7 +2,8 @@ let bodyParser = require("body-parser");
 let express = require("express");
 let mongoose = require("mongoose");
 let app = express();
-Campground = require("./models/campground");
+let Campground = require("./models/campground");
+let Comment = require("./models/comment");
 seedDB = require("./seeds");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -80,6 +81,26 @@ app.get("/camps/:id/comments/new", function (req, res) {
     }
   });
   // res.render("comments/new.ejs");
+});
+
+app.post("/camps/:id/comments", function (req, res) {
+  //find camp
+  Campground.findById(req.params.id, function (err, camp) {
+    if (err) {
+      console.log(err);
+      res.redirect("/camps");
+    } else {
+      Comment.create(req.body.comment, function (err, comment) {
+        if (err) {
+          console.log(err);
+        } else {
+          camp.comments.push(comment);
+          camp.save();
+          res.redirect("/camps/" + camp._id);
+        }
+      });
+    }
+  });
 });
 
 // =================
