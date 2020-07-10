@@ -2,6 +2,25 @@ body {
     background-color: azure;
 }
 
+#my-index {
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+.main-row {
+    margin-top: 20%;
+    margin-bottom: 0 !important;
+}
+
+.main-btn {
+    margin-top: 30px;
+}
+
+.show-card {
+    margin-top: 5px;
+    margin-bottom: 100px;
+}
+
 .img-thumbnail img {
     width: 100%;
 }
@@ -9,4 +28,12 @@ body {
 .img-thumbnail .figure-caption {
     padding: 9px;
     padding-top: 15px;
+}
+
+.comment-new {
+    margin-top: 10%;
+}
+
+.camp-new {
+    margin-top: 5%;
 }

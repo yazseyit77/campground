@@ -3,17 +3,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8 col-md-12" id="itemsCentered">
+        <div class="col-lg-8 col-md-12 text-center comment-new ">
             <h1>Add Comment to <%= camp.name %></h1>
             <br>
             <form action="/camps/<%= camp.id %>/comments" method="POST">
-                <input class="form-control" type="text" name="comment[text]" id="" placeholder="Camp name">
+                <input class="form-control" type="text" name="comment[text]" id="" placeholder="Write your comment">
                 <br>
-                <input class="form-control" type="text" name="comment[author]" id="" placeholder="Picture">
+                <input class="form-control" type="text" name="comment[author]" id="" placeholder="Your name">
                 <br>
-                <button class="btn btn-primary">Add</button>
+                <button class="btn btn-primary">Submit</button>
             </form>
-            <br> <br>
+            <br>
+            <hr>
             <a href="/camps">Go Back</a>
         </div>
     </div>
