@@ -1,7 +1,13 @@
 <%- include("partials/header") -%>
 
+<a href="/camps">Go Back</a>
+<br> <br>
 <h1><%= camp.name %></h1>
 <img src="<%= camp.img %>" />
 <p><%= camp.description %></p>
+
+<% camp.comments.forEach(function(comment){ %>
+<p><strong><%= comment.author %></strong> - <%= comment.text %></p>
+<% }) %>
 
 <%- include("partials/footer") -%>
