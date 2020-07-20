@@ -16,6 +16,21 @@ mongoose.connect("mongodb://localhost:27017/campground", {
 });
 seedDB();
 
+// Passport Configuration
+app.use(
+  require("express-session")({
+    secret: "first time setting up passport with expressjs",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 // main page
 app.get("/", (req, res) => {
   res.render("landing.ejs");
@@ -103,6 +118,27 @@ app.post("/camps/:id/comments", function (req, res) {
         }
       });
     }
+  });
+});
+
+// =================
+// Auth Routes
+// Show register form
+app.get("/register", function (req, res) {
+  res.render("register.ejs");
+});
+
+//handle signup
+app.post("/register", function (req, res) {
+  let newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, function (err, user) {
+    if (err) {
+      console.log(err);
+      return res.render("register.ejs");
+    }
+    passport.authenticate("local")(req, res, function () {
+      res.redirect("/camps");
+    });
   });
 });
 
