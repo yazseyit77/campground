@@ -24,7 +24,10 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -42,7 +45,10 @@ app.get("/camps", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("campgrounds/index.ejs", { camps: AllCampgrounds });
+      res.render("campgrounds/index.ejs", {
+        camps: AllCampgrounds,
+        currentUser: req.user,
+      });
     }
   });
 });

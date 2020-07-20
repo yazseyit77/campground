@@ -25,9 +25,13 @@
             </div>
             <div class="">
                 <ul class="navbar-nav navbar-right">
+                    <% if(!currentUser){ %>
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">SignUp</a></li>
+                    <% } else{ %>
+                    <li><a href="#">Signed in as: <%= currentUser.username %></a></li>
                     <li><a href="/logout">Logout</a></li>
+                    <% } %>
                 </ul>
             </div>
         </div>
