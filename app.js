@@ -142,6 +142,20 @@ app.post("/register", function (req, res) {
   });
 });
 
+// Show login form
+app.get("/login", function (req, res) {
+  res.render("login.ejs");
+});
+//handle login
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/camps",
+    failureRedirect: "/login",
+  }),
+  function (req, res) {}
+);
+
 // =================
 // PORT localhost:7000
 app.listen(7000, console.log("Camping app listening on PORT: 7000"));
