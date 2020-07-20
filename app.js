@@ -90,7 +90,7 @@ app.get("/camps/:id", (req, res) => {
 // =================
 // COMMENTS ROUTES
 // =================
-app.get("/camps/:id/comments/new", function (req, res) {
+app.get("/camps/:id/comments/new", isLoggedIn, function (req, res) {
   Campground.findById(req.params.id, function (err, camp) {
     if (err) {
       console.log(err);
@@ -101,7 +101,7 @@ app.get("/camps/:id/comments/new", function (req, res) {
   // res.render("comments/new.ejs");
 });
 
-app.post("/camps/:id/comments", function (req, res) {
+app.post("/camps/:id/comments", isLoggedIn, function (req, res) {
   //find camp
   Campground.findById(req.params.id, function (err, camp) {
     if (err) {
@@ -155,6 +155,18 @@ app.post(
   }),
   function (req, res) {}
 );
+// logout route
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/camps");
+});
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 // =================
 // PORT localhost:7000
