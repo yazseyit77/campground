@@ -14,7 +14,7 @@ mongoose.connect("mongodb://localhost:27017/campground", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-seedDB();
+// seedDB(); // seed the DB
 
 // require routes
 let routesForComments = require("./routes/comments");
