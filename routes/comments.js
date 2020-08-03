@@ -68,6 +68,18 @@ router.put("/camps/:id/comments/:comment_id", function (req, res) {
   });
 });
 
+// comments destroy route
+
+router.delete("/camps/:id/comments/:comment_id", function (req, res) {
+  Comment.findByIdAndRemove(req.params.comment_id, function (err) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.redirect("/camps/" + req.params.id);
+    }
+  });
+});
+
 // middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

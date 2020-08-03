@@ -22,10 +22,9 @@
                     <h3><a href=""><%= camp.name %></a></h3>
                     <p><em>Campground added by: <strong><%= camp.author.username %></strong></em></p>
                     <% if(currentUser && camp.author.id.equals(currentUser._id)){ %>
-                    <a class="btn btn-sm  btn-outline-info" href="/camps/<%= camp._id %>/edit"><i
-                            class="fas fa-pencil-alt"></i></a>
+                    <a class="btn btn-info" href="/camps/<%= camp._id %>/edit"><i class="fas fa-pencil-alt"></i></a>
                     <form id="deleteForm" action="/camps/<%= camp._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-sm  btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                     </form>
                     <% } %>
                     <hr>
@@ -43,9 +42,12 @@
                         <strong><%= comment.author.username %></strong>
                         <span class="pull-right">10 days ago</span>
                         <p><em><%= comment.text %></em></p>
-                        <a class="btn btn-sm btn-outline-info"
-                            href="/camps/<%= camp._id %>/comments/<%= comment._id%>/edit "><i
+                        <a class="btn btn-sm btn-info" href="/camps/<%= camp._id %>/comments/<%= comment._id%>/edit "><i
                                 class="far fa-edit"></i></a>
+                        <form id="deleteForm" action="/camps/<%= camp._id %>/comments/<%= comment._id%>?_method=DELETE"
+                            method="POST">
+                            <button class="btn btn-sm  btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
                         <hr>
                     </div>
                 </div>
