@@ -37,9 +37,18 @@
                 </ul>
             </div>
         </div>
-        <!-- <div class="d-flex">
-            <a href="/new"><button class="btn btn-outline-light" type="submit">New
-                    Camp</button></a>
-        </div> -->
-
     </nav>
+
+    <div class="container">
+        <br>
+        <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+        <div class="alert alert-success">
+            <%= success %>
+        </div>
+        <% } %>
+    </div>

@@ -1,6 +1,7 @@
 let bodyParser = require("body-parser");
 let express = require("express");
 let mongoose = require("mongoose");
+let flash = require("connect-flash");
 let app = express();
 let passport = require("passport");
 let LocalStrategy = require("passport-local");
@@ -9,9 +10,11 @@ let Campground = require("./models/campground");
 let Comment = require("./models/comment");
 let User = require("./models/user");
 seedDB = require("./seeds");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 mongoose.connect("mongodb://localhost:27017/campground", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -34,6 +37,8 @@ app.use(
 );
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 app.use(passport.initialize());

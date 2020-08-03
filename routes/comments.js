@@ -30,6 +30,7 @@ router.post("/camps/:id/comments", middleware.isLoggedIn, function (req, res) {
     } else {
       Comment.create(req.body.comment, function (err, comment) {
         if (err) {
+          req.flash("error", "Ooops something went wrong!");
           console.log(err);
         } else {
           comment.author.id = req.user._id;
@@ -37,6 +38,7 @@ router.post("/camps/:id/comments", middleware.isLoggedIn, function (req, res) {
           comment.save();
           camp.comments.push(comment);
           camp.save();
+          req.flash("success", "Comment was added successfully!");
           res.redirect("/camps/" + camp._id);
         }
       });
@@ -90,6 +92,7 @@ router.delete(
       if (err) {
         res.redirect("back");
       } else {
+        req.flash("success", "Comment was successfully deleted!");
         res.redirect("/camps/" + req.params.id);
       }
     });

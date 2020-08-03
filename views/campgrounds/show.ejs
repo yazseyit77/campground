@@ -18,7 +18,7 @@
             <div class="img-thumbnail">
                 <img class="img-responsive" src="<%= camp.img %>" />
                 <div class="figure-caption">
-                    <h4 class="pull-right">$16/night</h4>
+                    <h4 class="pull-right">$<%= camp.price %>/night</h4>
                     <h3><a href=""><%= camp.name %></a></h3>
                     <p><em>Campground added by: <strong><%= camp.author.username %></strong></em></p>
                     <% if(currentUser && camp.author.id.equals(currentUser._id)){ %>

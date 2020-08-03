@@ -9,6 +9,9 @@
             <form action="/camps/<%= camp._id %>/?_method=PUT" method="POST">
                 <input class="form-control" type="text" name="campground[name]" id="" value="<%= camp.name %>">
                 <br>
+                <input class="form-control" type="number" name="campground[price]" id="" value="<%= camp.price %>"
+                    min="0.01" step="0.01">
+                <br>
                 <input class="form-control" type="text" name="campground[image]" id="" value="<%= camp.img %>">
                 <br>
                 <input class="form-control" type="text" name="campground[description]" id=""

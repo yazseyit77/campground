@@ -1,14 +1,43 @@
-<%- include("partials/header") -%>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>Campground</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="/stylesheets/main.css"> -->
+    <link rel="stylesheet" href="/stylesheets/landing.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async>
+    </script>
+</head>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8 col-md-12 text-center main-row">
-            <h1>Welcome to the Campgrounds</h1>
-            <a href="/camps"><button class="btn btn-primary main-btn">View the Campgrounds</button></a>
+<body>
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
         </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <% } %>
     </div>
-</div>
+    <div id="landing-header">
+        <h1>Welcome to the Campgrounds!</h1>
+        <a href="/camps" class="btn btn-lg btn-primary">View All Campgrounds</a>
+    </div>
+    <ul class="slideshow">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 
-<%- include("partials/footer") -%>
+    <%- include("partials/footer") -%>

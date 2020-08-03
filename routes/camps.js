@@ -20,13 +20,20 @@ router.get("/camps", (req, res) => {
 // create - add new camp to DB
 router.post("/camps", middleware.isLoggedIn, (req, res) => {
   const name = req.body.name;
+  const price = req.body.price;
   const image = req.body.image;
   const desc = req.body.description;
   let author = {
     id: req.user._id,
     username: req.user.username,
   };
-  const newCamp = { name: name, img: image, description: desc, author: author };
+  const newCamp = {
+    name: name,
+    price: price,
+    img: image,
+    description: desc,
+    author: author,
+  };
   Campground.create(newCamp, (err, newCreated) => {
     if (err) {
       console.log(err);
@@ -91,6 +98,7 @@ router.delete("/camps/:id", middleware.campCreator, (req, res) => {
     if (err) {
       res.redirect("/camps");
     } else {
+      req.flash("success", "Campground was successfully deleted!");
       res.redirect("/camps");
     }
   });
