@@ -37,3 +37,7 @@ body {
 .camp-new {
     margin-top: 5%;
 }
+
+#deleteForm {
+    display: inline;
+}

@@ -18,6 +18,9 @@
                     <h3><a href=""><%= camp.name %></a></h3>
                     <p><em>Campground added by: <strong><%= camp.author.username %></strong></em></p>
                     <a class="btn btn-warning" href="/camps/<%= camp._id %>/edit">Edit</a>
+                    <form id="deleteForm" action="/camps/<%= camp._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
                     <hr>
                     <p><%= camp.description %></p>
                 </div>
