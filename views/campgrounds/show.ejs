@@ -1,6 +1,7 @@
 <%- include("../partials/header") -%>
 
 <div class="container">
+
     <div class="row" style="padding-top: 25px;">
         <div class="col-md-3">
             <p class="lead">Campground</p>
@@ -8,6 +9,9 @@
                 <li class="list-group-item active">Info 1</li>
                 <li class="list-group-item">Info 2</li>
                 <li class="list-group-item">Info 3</li>
+                <br>
+                <p><a href="/camps"><i class="primary far fa-hand-point-left"></i> Go
+                        Back</a></p>
             </div>
         </div>
         <div class="col-md-9">
@@ -18,9 +22,10 @@
                     <h3><a href=""><%= camp.name %></a></h3>
                     <p><em>Campground added by: <strong><%= camp.author.username %></strong></em></p>
                     <% if(currentUser && camp.author.id.equals(currentUser._id)){ %>
-                    <a class="btn btn-warning" href="/camps/<%= camp._id %>/edit">Edit</a>
+                    <a class="btn btn-sm  btn-outline-info" href="/camps/<%= camp._id %>/edit"><i
+                            class="fas fa-pencil-alt"></i></a>
                     <form id="deleteForm" action="/camps/<%= camp._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-sm  btn-outline-danger"><i class="far fa-trash-alt"></i></button>
                     </form>
                     <% } %>
                     <hr>
@@ -29,7 +34,7 @@
             </div>
             <div class="card card-body show-card">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/camps/<%= camp._id %>/comments/new">Leave Comment</a>
+                    <a class="btn btn-sm btn-success" href="/camps/<%= camp._id %>/comments/new">Leave Comment</a>
                 </div>
                 <hr>
                 <% camp.comments.forEach(function(comment){ %>
@@ -38,6 +43,10 @@
                         <strong><%= comment.author.username %></strong>
                         <span class="pull-right">10 days ago</span>
                         <p><em><%= comment.text %></em></p>
+                        <a class="btn btn-sm btn-outline-info"
+                            href="/camps/<%= camp._id %>/comments/<%= comment._id%>/edit "><i
+                                class="far fa-edit"></i></a>
+                        <hr>
                     </div>
                 </div>
                 <% }) %>
