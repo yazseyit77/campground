@@ -40,8 +40,11 @@ router.post("/camps/:id/comments", isLoggedIn, function (req, res) {
   });
 });
 
-// Show edit form for Comment
-router.get("/camps/:id/comments/:comment_id/edit", function (req, res) {
+// Comment edit route
+router.get("/camps/:id/comments/:comment_id/edit", commentCreator, function (
+  req,
+  res
+) {
   Comment.findById(req.params.comment_id, function (err, foundComment) {
     if (err) {
       res.redirect("back");
@@ -55,7 +58,10 @@ router.get("/camps/:id/comments/:comment_id/edit", function (req, res) {
 });
 
 // UPDATE comment route
-router.put("/camps/:id/comments/:comment_id", function (req, res) {
+router.put("/camps/:id/comments/:comment_id", commentCreator, function (
+  req,
+  res
+) {
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function (
     err,
     updatedComment
@@ -69,8 +75,10 @@ router.put("/camps/:id/comments/:comment_id", function (req, res) {
 });
 
 // comments destroy route
-
-router.delete("/camps/:id/comments/:comment_id", function (req, res) {
+router.delete("/camps/:id/comments/:comment_id", commentCreator, function (
+  req,
+  res
+) {
   Comment.findByIdAndRemove(req.params.comment_id, function (err) {
     if (err) {
       res.redirect("back");
@@ -86,6 +94,25 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   res.redirect("/login");
+}
+
+// authorization middleware
+function commentCreator(req, res, next) {
+  if (req.isAuthenticated()) {
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+      if (err) {
+        res.redirect("back");
+      } else {
+        if (foundComment.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
 }
 
 module.exports = router;
