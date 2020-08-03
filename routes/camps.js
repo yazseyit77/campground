@@ -50,29 +50,27 @@ router.get("/camps/:id", (req, res) => {
   //find the camp with given id, show that page
   Campground.findById(req.params.id)
     .populate("comments")
-    .exec((err, foundCamp) => {
+    .exec(function (err, foundCamp) {
       if (err) {
         console.log(err);
       } else {
-        console.log(foundCamp);
-        res.render("campgrounds/show.ejs", { camp: foundCamp });
+        res.render("campgrounds/show.ejs", {
+          camp: foundCamp,
+          currentUser: req.user,
+        });
       }
     });
 });
 
 // edit camps route
-router.get("/camps/:id/edit", (req, res) => {
+router.get("/camps/:id/edit", campCreator, (req, res) => {
   Campground.findById(req.params.id, (err, foundCamp) => {
-    if (err) {
-      res.redirect("/camps");
-    } else {
-      res.render("campgrounds/edit.ejs", { camp: foundCamp });
-    }
+    res.render("campgrounds/edit.ejs", { camp: foundCamp });
   });
 });
 
 // update camps route
-router.put("/camps/:id", (req, res) => {
+router.put("/camps/:id", campCreator, (req, res) => {
   Campground.findByIdAndUpdate(
     req.params.id,
     req.body.campground,
@@ -87,7 +85,7 @@ router.put("/camps/:id", (req, res) => {
 });
 
 // Destroy camp route
-router.delete("/camps/:id", (req, res) => {
+router.delete("/camps/:id", campCreator, (req, res) => {
   Campground.findByIdAndRemove(req.params.id, function (err) {
     if (err) {
       res.redirect("/camps");
@@ -103,6 +101,24 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   res.redirect("/login");
+}
+
+function campCreator(req, res, next) {
+  if (req.isAuthenticated()) {
+    Campground.findById(req.params.id, (err, foundCamp) => {
+      if (err) {
+        res.redirect("back");
+      } else {
+        if (foundCamp.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
 }
 
 module.exports = router;
