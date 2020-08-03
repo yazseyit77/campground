@@ -4,15 +4,18 @@ let mongoose = require("mongoose");
 let app = express();
 let passport = require("passport");
 let LocalStrategy = require("passport-local");
+let methodOverride = require("method-override");
 let Campground = require("./models/campground");
 let Comment = require("./models/comment");
 let User = require("./models/user");
 seedDB = require("./seeds");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 mongoose.connect("mongodb://localhost:27017/campground", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 // seedDB(); // seed the DB
 

@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 
-//Schema set up
+//Schema setup
 
 let campSchema = new mongoose.Schema({
   name: String,
