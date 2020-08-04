@@ -1,3 +1,4 @@
+require("dotenv").config();
 let bodyParser = require("body-parser");
 let express = require("express");
 let mongoose = require("mongoose");
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = require("moment");
 mongoose.connect("mongodb://localhost:27017/campground", {
   useNewUrlParser: true,
   useUnifiedTopology: true,

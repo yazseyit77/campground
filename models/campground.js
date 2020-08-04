@@ -7,6 +7,7 @@ let campSchema = new mongoose.Schema({
   price: String,
   img: String,
   description: String,
+  createdAt: { type: Date, default: Date.now },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
