@@ -22,7 +22,8 @@
                 <div class="figure-caption">
                     <h4 class="pull-right">$<%= camp.price %>/night</h4>
                     <h3><a href=""><%= camp.name %></a></h3>
-                    <p><em>Campground added by: <strong><%= camp.author.username %>,
+                    <p><em>Campground added by: <strong><a
+                                    href="/users/<%= camp.author.id %>"><%= camp.author.username %></a>,
                                 <%= moment(camp.createdAt).fromNow() %></strong></em></p>
                     <% if(currentUser && camp.author.id.equals(currentUser._id)){ %>
                     <a class="btn btn-info" href="/camps/<%= camp._id %>/edit"><i class="fas fa-pencil-alt"></i></a>

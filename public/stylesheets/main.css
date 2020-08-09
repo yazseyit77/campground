@@ -47,3 +47,8 @@ body {
     height: 400px;
     width: 100%;
 }
+
+/* User Profile */
+.userProfile {
+    margin-top: 50px;
+}

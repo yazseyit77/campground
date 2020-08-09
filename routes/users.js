@@ -2,6 +2,7 @@ let express = require("express");
 let router = express.Router();
 let passport = require("passport");
 let User = require("../models/user");
+let Campground = require("../models/campground");
 
 // main page: root route
 router.get("/", (req, res) => {
@@ -16,7 +17,14 @@ router.get("/register", function (req, res) {
 
 //handle signup
 router.post("/register", function (req, res) {
-  let newUser = new User({ username: req.body.username });
+  let newUser = new User({
+    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    avatar: req.body.avatar,
+    age: req.body.age,
+    email: req.body.email,
+  });
   User.register(newUser, req.body.password, function (err, user) {
     if (err) {
       req.flash("error", err.message);
@@ -49,6 +57,27 @@ router.get("/logout", function (req, res) {
   req.logout();
   req.flash("success", "Logout Successful!");
   res.redirect("/camps");
+});
+
+// user profile
+router.get("/users/:id", function (req, res) {
+  User.findById(req.params.id, function (err, foundUser) {
+    if (err) {
+      req.flash("error", "Something went wrong!");
+      res.redirect("/camps");
+    } else {
+      Campground.find()
+        .where("author.id")
+        .equals(foundUser._id)
+        .exec(function (err, camps) {
+          if (err) {
+            req.flash("error", "Something went wrong!");
+            res.redirect("/camps");
+          }
+          res.render("users/show.ejs", { user: foundUser, camps: camps });
+        });
+    }
+  });
 });
 
 module.exports = router;
