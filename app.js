@@ -55,4 +55,7 @@ app.use(routesForCamps);
 
 // =================
 // PORT localhost:7000
-app.listen(7000, console.log("Camping app listening on PORT: 7000"));
+var port = process.env.PORT || 7000;
+app.listen(port, function () {
+  console.log("Camping app listening on PORT: 7000");
+});
