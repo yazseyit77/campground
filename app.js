@@ -28,6 +28,7 @@ mongoose
     {
       useNewUrlParser: true,
       useCreateIndex: true,
+      useUnifiedTopology: true,
     }
   )
   .then(() => {
@@ -36,7 +37,6 @@ mongoose
   .catch((err) => {
     console.log("Error:", err.message);
   });
-// mongo "mongodb+srv://campground.d3rj1.mongodb.net/<dbname>" --username yazseyit77
 // seedDB(); // seed the DB
 
 // require routes
