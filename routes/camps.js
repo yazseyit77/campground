@@ -49,9 +49,9 @@ router.get("/camps/new", middleware.isLoggedIn, (req, res) => {
 });
 
 // code below breaks the route crashing with css file
-router.get("/camps/stylesheets/main.css", function (req, res) {
-  break;
-});
+// router.get("/camps/stylesheets/main.css", function (req, res) {
+//   break;
+// });
 
 // show route/page - individual camp(by id)
 router.get("/camps/:id", (req, res) => {
