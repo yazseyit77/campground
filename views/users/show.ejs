@@ -18,11 +18,11 @@
         <div class="col-md-5">
             <h2><%= user.firstName %>'s Campgrounds:</h2>
             <ul>
+                <% camps.forEach(camp => {  %>
                 <li>
-                    <% camps.forEach(camp => {  %>
                     <a href="/camps/<%= camp.id %>"><%= camp.name %></a>
-                    <% }) %>
                 </li>
+                <% }) %>
             </ul>
         </div>
     </div>
