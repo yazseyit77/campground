@@ -17,11 +17,26 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.locals.moment = require("moment");
-mongoose.connect("mongodb://localhost:27017/campground", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+// mongoose.connect("mongodb://localhost:27017/campground", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false,
+// });
+mongoose
+  .connect(
+    "mongodb+srv://yazseyit77:chumarik777@campground.jzq41.mongodb.net/Campground?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+    }
+  )
+  .then(() => {
+    console.log("Connected to DB");
+  })
+  .catch((err) => {
+    console.log("Error:", err.message);
+  });
+// mongo "mongodb+srv://campground.d3rj1.mongodb.net/<dbname>" --username yazseyit77
 // seedDB(); // seed the DB
 
 // require routes
